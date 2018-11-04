@@ -1,4 +1,2 @@
 mkdir dist;
-start-job -name RemoveItem -ScriptBlock{
-    Remove-Item check.ps1
-}
+Remove-Item check.ps1;
