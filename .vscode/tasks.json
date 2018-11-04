@@ -6,16 +6,10 @@
         {
             "label": "Build project",
             "type": "shell",
-            "command": "gcc",
+            "command": "make",
             "windows": {
-                "command": "gcc"
+                "command": "make"
             },
-            "args": [
-                "-g",
-                "-o",
-                "main.exe",
-                "${workspaceFolder}\\src\\main.c"
-            ],
             "problemMatcher":"$gcc",
             "group": {
                 "kind": "build",
