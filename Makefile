@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall 
-TARGET = out/main.exe
+TARGET = dist/main.exe
 SRC = src
 OBJ = obj
 
