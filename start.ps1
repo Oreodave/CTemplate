@@ -1,2 +1,2 @@
 mkdir dist, obj;
-Remove-Item check.ps1;
+Remove-Item start.ps1;
