@@ -1,6 +1,7 @@
+PROJ_NAME = main
+TARGET = dist/$(PROJ_NAME).exe
 CC = gcc
 CFLAGS = -g -Wall 
-TARGET = dist/main.exe
 SRC = src
 OBJ = obj
 
