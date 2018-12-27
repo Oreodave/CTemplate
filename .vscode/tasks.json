@@ -7,14 +7,20 @@
             "label": "Build project",
             "type": "shell",
             "command": "make",
-            "windows": {
-                "command": "make"
-            },
             "problemMatcher":"$gcc",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Build project(Clang)",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clang"
+            ],
+            "group": "build"
         }
     ]
 }
