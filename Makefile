@@ -6,7 +6,7 @@ TARGET = dist/$(PROJ_NAME)
 CC = gcc
 LCC = clang
 CFLAGS = -g -Wall
-LFLAGS = -target x86_64 $(CFLAGS) -IC:\MinGW\include
+LFLAGS = -target i686-w64-windows-gnu $(CFLAGS)
 
 # folder/file options
 SRC = src
@@ -19,14 +19,14 @@ LOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-clang.o, $(SOURCES))
 all: $(TARGET)
 clang: $(TARGET)-clang
 
-$(TARGET)-clang: $(LOBJECTS)
-	$(LCC) $(LFLAGS) $^ -o $@.exe
-
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) $^ -o $@.exe
 
-$(OBJ)/%-clang.o: $(SRC)/%.c
-	$(LCC) $(LFLAGS) -MMD -c $^ -o $@
-
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(CFLAGS) -MMD -c $^ -o $@
+
+$(TARGET)-clang: $(LOBJECTS)
+	$(LCC) $(LFLAGS) $^ -o $@.exe
+
+$(OBJ)/%-clang.o: $(SRC)/%.c
+	$(LCC) $(LFLAGS) -MMD -c $^ -o $@
