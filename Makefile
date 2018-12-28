@@ -18,7 +18,8 @@ DOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-debug.o, $(SOURCES))
 LOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-clang.o, $(SOURCES))
 
 # recipes
-all: $(TARGET)-debug # default
+default: $(TARGET)-debug # default
+all: $(TARGET)-debug $(TARGET)-clang $(TARGET)
 release: $(TARGET) # release
 clang: $(TARGET)-clang # clang
 
