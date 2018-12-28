@@ -24,19 +24,25 @@ release: $(TARGET) # release
 clang: $(TARGET)-clang # clang
 
 $(TARGET): $(OBJECTS)
+	echo Linking release objects;
 	$(CC) $(RFLAGS) $^ -o $@.exe
 
 $(OBJ)/%.o: $(SRC)/%.c 
+	echo Compiling release objects;
 	$(CC) $(RFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-debug: $(DOBJECTS)
+	echo Linking debug objects;
 	$(CC) $(CFLAGS) $^ -o $@.exe
 
 $(OBJ)/%-debug.o: $(SRC)/%.c
+	echo Compiling debug objects;
 	$(CC) $(CFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-clang: $(LOBJECTS)
+	echo Linking clang objects;
 	$(LCC) $(LFLAGS) $^ -o $@.exe
 
 $(OBJ)/%-clang.o: $(SRC)/%.c
+	echo Compiling clang objects
 	$(LCC) $(LFLAGS) -MMD -c $^ -o $@
