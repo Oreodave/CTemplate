@@ -1,2 +1,2 @@
 mkdir dist, obj;
-Remove-Item start.ps1;
+Remove-Item LICENSE, README.md, start.ps1;
