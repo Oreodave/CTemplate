@@ -1,11 +1,12 @@
 # critical variables
 PROJ_NAME = main
 TARGET = dist/$(PROJ_NAME)
+FILETYPE = .exe
 
 # compiler options
 CC = gcc
 LCC = clang
-CFLAGS = -Og -g -Wall # debug flags
+DFLAGS = -Og -g -Wall # debug flags
 RFLAGS = -O3 -Wall # release flags
 
 # folder/file options
@@ -26,22 +27,22 @@ all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
 clean: 
 	find . -maxdepth 2 -type f -name *.o -delete -or \
 		-name *.d -delete -or \
-		-name *.exe -delete
+		-name *$(FILETYPE) -delete
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(RFLAGS) $^ -o $@.exe
+	$(CC) $(RFLAGS) $^ -o $@$(FILETYPE)
 
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(RFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-gcc: $(DOBJECTS)
-	$(CC) $(CFLAGS) $^ -o $@.exe
+	$(CC) $(DFLAGS) $^ -o $@$(FILETYPE)
 
 $(OBJ)/%-gcc.o: $(SRC)/%.c
-	$(CC) $(CFLAGS) -MMD -c $^ -o $@
+	$(CC) $(DFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-clang: $(LOBJECTS)
-	$(LCC) $(CFLAGS) $^ -o $@.exe
+	$(LCC) $(DFLAGS) $^ -o $@$(FILETYPE)
 
 $(OBJ)/%-clang.o: $(SRC)/%.c
-	$(LCC) $(CFLAGS) -MMD -c $^ -o $@
+	$(LCC) $(DFLAGS) -MMD -c $^ -o $@
