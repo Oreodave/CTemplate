@@ -31,7 +31,7 @@ clean:
 $(TARGET): $(OBJECTS)
 	$(CC) $(RFLAGS) $^ -o $@.exe
 
-$(OBJ)/%.o: $(SRC)/%.c 
+$(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(RFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-gcc: $(DOBJECTS)
