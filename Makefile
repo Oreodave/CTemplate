@@ -6,7 +6,6 @@ TARGET = dist/$(PROJ_NAME)
 CC = gcc
 LCC = clang
 CFLAGS = -Og -g -Wall # debug flags
-LFLAGS = -target i686-w64-windows-gnu $(CFLAGS) # clang flags
 RFLAGS = -O3 -Wall # release flags
 
 # folder/file options
@@ -14,35 +13,35 @@ SRC = src
 OBJ = obj
 SOURCES := $(wildcard $(SRC)/*.c)
 OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))
-DOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-debug.o, $(SOURCES))
+DOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-gcc.o, $(SOURCES))
 LOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-clang.o, $(SOURCES))
 
 # recipes
-default: $(TARGET)-debug # default
-all: $(TARGET)-debug $(TARGET)-clang $(TARGET)
+default: $(TARGET)-clang # default
 release: $(TARGET) # release
-clang: $(TARGET)-clang # clang
+gcc: $(TARGET)-gcc
+all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
+
+
+clean: 
+	find . -maxdepth 2 -type f -name *.o -delete -or \
+		-name *.d -delete -or \
+		-name *.exe -delete
 
 $(TARGET): $(OBJECTS)
-	echo Linking release objects;
 	$(CC) $(RFLAGS) $^ -o $@.exe
 
 $(OBJ)/%.o: $(SRC)/%.c 
-	echo Compiling release objects;
 	$(CC) $(RFLAGS) -MMD -c $^ -o $@
 
-$(TARGET)-debug: $(DOBJECTS)
-	echo Linking debug objects;
+$(TARGET)-gcc: $(DOBJECTS)
 	$(CC) $(CFLAGS) $^ -o $@.exe
 
-$(OBJ)/%-debug.o: $(SRC)/%.c
-	echo Compiling debug objects;
+$(OBJ)/%-gcc.o: $(SRC)/%.c
 	$(CC) $(CFLAGS) -MMD -c $^ -o $@
 
 $(TARGET)-clang: $(LOBJECTS)
-	echo Linking clang objects;
-	$(LCC) $(LFLAGS) $^ -o $@.exe
+	$(LCC) $(CFLAGS) $^ -o $@.exe
 
 $(OBJ)/%-clang.o: $(SRC)/%.c
-	echo Compiling clang objects
-	$(LCC) $(LFLAGS) -MMD -c $^ -o $@
+	$(LCC) $(CFLAGS) -MMD -c $^ -o $@
