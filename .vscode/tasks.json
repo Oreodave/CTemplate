@@ -17,8 +17,9 @@
             "label": "Build project(Clang)",
             "type": "shell",
             "command": "make",
+            "problemMatcher": "$gcc",
             "args": [
-                "clang"
+                "gcc"
             ],
             "group": "build"
         }
