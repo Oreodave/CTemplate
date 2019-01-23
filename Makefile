@@ -25,7 +25,8 @@ all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
 
 
 clean: 
-	find . -maxdepth 2 -type f -name *.o -delete -or \
+	find . -maxdepth 2 -type f \
+		-name *.o -delete -or \
 		-name *.d -delete -or \
 		-name *$(FILETYPE) -delete
 
