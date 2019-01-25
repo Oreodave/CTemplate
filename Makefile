@@ -17,14 +17,14 @@ OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))
 DOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-gcc.o, $(SOURCES))
 LOBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%-clang.o, $(SOURCES))
 
-# recipes
+# build recipes
 default: $(TARGET)-clang # default
 release: $(TARGET) # release
 gcc: $(TARGET)-gcc
 all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
 
 
-clean: 
+clean:
 	find . -maxdepth 2 -type f \
 		-name *.o -delete -or \
 		-name *.d -delete -or \
