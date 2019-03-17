@@ -31,8 +31,8 @@ test:
 clean:
 	find . -maxdepth 2 -type f \
 		-name *.o -delete -or \
-		-name *.d -delete -or \
-		-name *$(FILETYPE) -delete
+        -name *.d -delete -or \
+        -name *$(FILETYPE) -delete
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(RFLAGS) $^ -o $@$(FILETYPE)
