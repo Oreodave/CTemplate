@@ -6,7 +6,7 @@ FILETYPE = .exe
 # compiler options
 CC = gcc
 LCC = clang
-UFLAGS = -I includes/
+UFLAGS = -I src/includes/
 DFLAGS = -Og -g -Wall $(UFLAGS) # debug flags
 RFLAGS = -O3 -Wall $(UFLAGS) # release flags
 

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mkdir dist obj includes;
+mkdir dist obj src/includes;
 rm README.md start.sh;
