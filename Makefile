@@ -24,16 +24,15 @@ release: $(TARGET) # release
 gcc: $(TARGET)-gcc
 all: $(TARGET)-gcc $(TARGET)-clang $(TARGET)
 
-# test recipes
-test:
-	gdb $(TARGET)-clang.exe
-
-
 clean:
 	find . -maxdepth 2 -type f \
 		-name *.o -delete -or \
         -name *.d -delete -or \
         -name *$(FILETYPE) -delete
+
+# test recipes
+debug:
+	gdb $(TARGET)-clang.exe
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(RFLAGS) $^ -o $@$(FILETYPE)
