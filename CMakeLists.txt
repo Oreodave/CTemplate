@@ -15,12 +15,15 @@ enable_testing()
 file(GLOB_RECURSE HEADERS "includes/*.h")
 file(GLOB_RECURSE SRC "src/*.c")
 
+## Debug and release flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Werror -O0")
+
 ## Executable recipes
-add_executable(${THIS}-debug ${SRC} ${HEADERS})
-add_executable(${THIS}-clean ${SRC} ${HEADERS})
+add_executable(${THIS} ${SRC} ${HEADERS})
 
-target_compile_options(${THIS}-debug PUBLIC -O0 -g -Wall)
-target_compile_options(${THIS}-clean PUBLIC -O3 -Wall)
-
-## Tests
-add_test(NAME memcheck COMMAND valgrind ./${THIS}-debug WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+## SDL2 INCLUDE
+# find_package(SDL2 REQUIRED)
+# find_package(SDL2_image REQUIRED)
+# include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+# target_link_libraries(${THIS} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
